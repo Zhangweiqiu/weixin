@@ -1,0 +1,37 @@
+package com.example.demo.service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dao.UserDao;
+import com.example.demo.model.User;
+
+@Service
+public class UserService {
+	@Autowired
+	UserDao userDao;
+	
+	
+	public Map<String,Object> login(String phone,String password){
+		Map<String,Object> map = new HashMap<>();
+		
+		User user = new User();
+		user = userDao.findOne(phone);
+		
+		if(user !=null ) {
+			if(password.equals(user.getPassword())) {
+				map.put("state", true);
+				map.put("user", user);
+				map.put("url", "/首页.html");
+			}else {
+				map.put("state", false);
+			}
+		}else
+			map.put("state", false);
+		
+		return map;
+	}
+}

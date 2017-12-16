@@ -1,0 +1,25 @@
+package com.example.demo.model;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+public class Business {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long bid;
+	
+	@NotNull
+	private String name;
+	@NotNull
+	private Float amount; //最高额度
+	@NotNull
+	private Integer period; //周期
+	@NotNull
+	private String qualification; //资格
+	@NotNull
+	private String materials; //材料
+	@NotNull
+	private String matters;//注意事项
+}

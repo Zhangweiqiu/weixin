@@ -1,0 +1,21 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dao.BorderDao;
+import com.example.demo.model.Border;
+
+@Service
+public class BorderService {
+	
+	@Autowired
+	BorderDao borderDao;
+	
+	public Integer findCount() {
+		List<Border> border = borderDao.findByState(2);
+		return border.size();
+	}
+}

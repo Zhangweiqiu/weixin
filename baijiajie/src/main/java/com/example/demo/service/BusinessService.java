@@ -1,0 +1,29 @@
+package com.example.demo.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dao.BusinessDao;
+import com.example.demo.model.Business;
+
+@Service
+public class BusinessService {
+	
+	@Autowired
+	BusinessDao businessDao;
+	
+	public Map<String,Object> addBInfoByAmount(){
+		Map<String,Object> map = new HashMap<>();
+		List<Business> business = businessDao.selectOrderByAmount();
+		if(business != null) {
+			map.put("state", true);
+			map.put("amount", business);
+		}else
+			map.put("state", false);
+		return map;
+	}
+}

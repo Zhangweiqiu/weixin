@@ -1,0 +1,38 @@
+package com.example.demo.controller;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.service.UserService;
+
+@RestController
+public class UserController {
+	
+	@Autowired
+	UserService userService;
+	
+	@RequestMapping("/login")
+	public Map<String,Object> login(String phone,String password){
+		System.out.println(phone);
+		return userService.login(phone, password);
+	}
+	
+	@RequestMapping("/checkInfo")
+	public Map<String,Object> checkInfo(String phone){
+		System.out.println(phone);
+		return userService.checkInfo(phone);
+	}
+	
+	@RequestMapping("/addUser")
+	public Map<String,Object> addUser(String phone,String password) {
+		return userService.addUser(phone, password);
+	}
+	
+	@RequestMapping("/modifyPsw")
+	public Map<String,Object> modifyPsw(String phone,String password){
+		return userService.modifyPsw(phone, password);
+	}
+}

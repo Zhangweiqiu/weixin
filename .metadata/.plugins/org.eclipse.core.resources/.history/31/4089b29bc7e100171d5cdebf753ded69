@@ -1,0 +1,21 @@
+package com.example.demo.controller;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.service.BusinessService;
+
+@RestController
+public class BusinessController {
+	@Autowired
+	BusinessService businessService;
+	
+	@RequestMapping("/addBInfoByAmount")
+	public Map<String,Object> addBInfoByAmount(){
+		System.out.println("1-2-3-4-5-6");
+		return businessService.addBInfoByAmount();
+	}
+}

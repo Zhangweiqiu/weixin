@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="cheshi" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="cheshi"/>
+			<item value="申请"/>
+			<item value="网贷"/>
+			<item value="mui-bar"/>
+			<item value="is_auto"/>
+			<item value="match"/>
+			<item value="bus_num"/>
+			<item value="mui-input-row"/>
+			<item value="mui-input-group"/>
+			<item value="check_box"/>
+			<item value="mui-input-clear"/>
+			<item value="checkCode"/>
+			<item value="Date"/>
+			<item value="Blob"/>
+			<item value="ckeck_alert2"/>
+		</list>
+		<list key="replacehistory">
+			<item value="String"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="356" key="DIALOG_WIDTH"/>
+		<item value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI" key="DIALOG_FONT_NAME"/>
+		<item value="454" key="DIALOG_HEIGHT"/>
+		<item value="1200" key="DIALOG_X_ORIGIN"/>
+		<item value="375" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

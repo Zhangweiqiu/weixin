@@ -1,0 +1,60 @@
+package com.example.demo.service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dao.UserDao;
+import com.example.demo.model.User;
+
+@Service
+public class UserService {
+	@Autowired
+	UserDao userDao;
+	
+	
+	public Map<String,Object> login(String phone,String password){
+		Map<String,Object> map = new HashMap<>();
+		
+		User user = new User();
+		user = userDao.findOne(phone);
+		
+		if(user !=null ) {
+			if(password.equals(user.getPassword())) {
+				map.put("state", true);
+				System.out.println(user.getPassword());
+				map.put("user", user);
+				map.put("url", "/首页.html");
+			}else {
+				map.put("state", false);
+			}
+		}else
+			map.put("state", false);
+		
+		return map;
+	}
+	
+	public Map<String,Object> checkInfo(String phone){
+		Map<String,Object> map = new HashMap<>();
+		
+		User user = new User();
+		user = userDao.findOne(phone);
+		
+		if(user !=null ) {
+			if(user.getState() == 0) {
+				map.put("state", true);
+				map.put("Info", 0);
+				map.put("url", "/完善个人信息.html");
+			}else {
+				map.put("state", true);
+				map.put("Info", 1);
+				map.put("url", "/百家放款.html");
+			}
+		}else
+			map.put("state", false);
+		
+		return map;
+	}
+}
