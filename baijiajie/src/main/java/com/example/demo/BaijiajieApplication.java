@@ -8,5 +8,6 @@ public class BaijiajieApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BaijiajieApplication.class, args);
+		
 	}
 }
