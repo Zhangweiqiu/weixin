@@ -635,8 +635,8 @@
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
     <script src="js/login.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript">
-		var ckeck;
+ <script type="text/javascript">
+		var ckeck = false;
 		$('.check_box li').click(function() {
 	 		ckeck = $(this).is('.liacti');
 	 		if(ckeck) {
@@ -771,6 +771,9 @@
 			bool = true;
 		}
 		
+		if(ckeck == false)
+			window.location.href = "/reg.html";
+		
 		if(bool && ckeck){
 			$.ajax({
 				url:'/addUser',
@@ -781,9 +784,10 @@
 					if(data.state){
 						alert("注册成功，将转到登录界面");
 						window.location.href = data.url;
-					}else
+					}else{
 						alert("注册失败，请检查数据是否正确");
 						window.location.href = "/reg.html";
+					}
 				}
 			});
 		}
