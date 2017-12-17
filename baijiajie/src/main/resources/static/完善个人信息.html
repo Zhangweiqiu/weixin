@@ -66,7 +66,7 @@
         <p>正在上传中</p>
     </div>
     <header class="mui-bar mui-bar-nav headerg ">
-        <a href="javascript:;" id="clearhc" class="mui-icon mui-icon-left-nav mui-pull-left"><span style=" font-size: 15px;font-family: 'microsoft yahei';vertical-align: inherit;">返回首页</span></a>
+        <a href="首页.html" id="clearhc" class="mui-icon mui-icon-left-nav mui-pull-left"><span style=" font-size: 15px;font-family: 'microsoft yahei';vertical-align: inherit;">返回首页</span></a>
         <h1 class="mui-title">完善个人借款信息</h1>
     </header>
     <div class="mui-content mui-bjj">
@@ -91,8 +91,12 @@
                     <!--<img class="yui" src="picture/jiantou.png" />-->
                 </li>
                 <!--<li>
+
                     <i><img src="picture/bbj-xiny.png" /></i>
+
                     <span>发起借款</span>
+
+
 
                 </li>-->
             </ul>
@@ -104,13 +108,21 @@
                     <input type="text" name="name" id="name" placeholder="输入您的姓名" />
                 </dd>
                 <!--<dd>
+
                    
+
                     <em>性别</em>
+
                     <select name="sex" id="sex" name="sex" class="bbj-jdb">
+
                         <option value="" selected="" disabled="" style="color: red;">请选择</option>
+
                         <option value="1">男</option>
+
                         <option value="0">女</option>
+
 					</select>
+
                 </dd>-->
                 <dd>
                     
@@ -178,9 +190,13 @@
 						</select>
                 </dd>
                 <!--<dd>
+
                    
+
                     <em class="iconfont icon-shenfenzheng"></em>
+
                     <input type="text" name="idnumber" id="idnumber" placeholder="输入您的身份证号码" />
+
                 </dd>-->
                 <!--<dd class="yzzx">
                     <em>服务密码</em>
@@ -242,38 +258,61 @@
 
         </div>
     <!--<dd>
+
         <div class="sfzcg1">
+
             1、身份证内容清晰 <br> 2、在适当放大后仍能清晰辨识 <br>
+
         </div>
+
        
+
        <em class="shenfz" style="visibility: hidden;">身份证正面照</em>
+
         <i style="width: 31%;">
+
             <span style="height: 21px;">身份证正面照</span>
+
             <img class="wx-img" id="wx-sfzmz" src=""/>
+
             
+
             <button type="button" class="scsfz">+上传图片
+
             <input type="file" class="file_input" less="2" id="file_input2" /></button>
+
         </i>
+
         <i style="width: 38%;">
+
         <span>示例图</span>
+
         <img class="wx-img"  style="max-width: 100px;" src="picture/weixb.png"/>
+
         <div class="mui-backdrop">
+
             <div class="bg-go">
+
         <i class="mui-icon mui-icon-closeempty"></i>
+
         <img class="cover-img1" src="picture/weixb.png">
+
         </div>
+
         </div>
+
         </i>
+
     </dd>-->
     
  <dd>
 
-<form  method="POST" action="/upload/batch" enctype="multipart/form-data"  >
+<form id="photoform" method="POST" action="/photoupload" enctype="multipart/form-data"  >
         <dd>
         <i style="width: 38%; ">
 							<span>本人手持身份证</span>
 							<img class="wx-img" id="wx-sfz" src=""/>
-							<button class="scsfz" type="button">+选择图片
+							<button class="scsfz" type="button" id="btnphoto">选择图片
 							<input type="file" name="file" class="file_input" less="0" id="file_input2" onchange="upload('#file_input2', '#wx-sfz');"/></button>
 						</i>
                     <i style="width: 38%; ">
@@ -286,8 +325,13 @@
         </div>
     </div>
     </i>
+     <div id="photoupload" style="display:none" >
+            <input   type="submit" value="+点击上传这张照片" />
+      </div>
       </dd>
-      
+     
+ </form>     
+ <form  id="qrcodeform" method="POST" action="/qrcodeupload" enctype="multipart/form-data"  >
       <dd>
             
             <!--<em class="shenfz" style="visibility: hidden;">上传微信二维码截图</em>-->
@@ -295,7 +339,7 @@
             <i style="width: 38%; ">
 							<span>上传微信二维码截图</span>
 							<img class="wx-img" id="wxewf" src=""/>
-							<button class="scsfz" type="button">+选择图片
+							<button class="scsfz" type="button" id="btnqrcode">选择图片
 								<input type="file" name="file" class="file_input" less="1" id="file_input1" onchange="nupload('#file_input1', '#wxewf');"/>
 							</button>
 
@@ -311,12 +355,12 @@
             </div>
             </div>
             </i>
-            
+             <div id="qrcodeupload" style="display:none" >
+            <input  type="submit" value="+点击上传这张二维码" />
+        </div>
         </dd>  
  
-        <p>
-            <input  type="submit" value="+上传图片" />
-        </p>
+       
     </form>
 
  </dd>
@@ -326,8 +370,11 @@
 				
                 <div class="bbj-botm">
                    <!--  <div class="mui-input-row mui-checkbox mui-left">
+
                         <input name="checkbox" value="" id="checkedx1" checked="" type="checkbox">
+
                         <label>本人承诺以上信息全部属实，并为其付fakepath相应法律责任</label>
+
                     </div>--> 
                     <!-- <button type="button" id="bbj-one">下一步</button> -->
                     <!--<p style="color: #3291ed;  text-decoration: underline; " id="p_link" >上传不成功？请点击跳转新页面...</p> -->
@@ -369,7 +416,7 @@
             </div>
         </div>
     </div>
-    <div class="pop pop_alert">
+    <div class="pop pop_alert"  >
         <div class="d_cell">
             <div class="pop_text">
                 <p class="pop_msg">消息提示框</p>
@@ -422,20 +469,33 @@
 		})
 
        /* $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', function(_result) {
+
             if (remote_ip_info.ret == '1') {
+
                 //              console.log(remote_ip_info.province);
+
                 //              console.log(remote_ip_info.city);
+
                 //              console.log(remote_ip_info.district);
+
                 //              console.log(remote_ip_info.isp);
+
                 //              console.log(remote_ip_info.type);
+
                 //              console.log(remote_ip_info.desc);
+
                 $('#location').val(remote_ip_info.province + remote_ip_info.city + remote_ip_info.district + remote_ip_info.isp + remote_ip_info.type + remote_ip_info.desc)
+
             } else {
+
                 alert('没有找到匹配的IP地址信息！');
+
             }
+
         });*/
         var upload = function(c, d){
     	    "use strict";
+    	    $("#photoupload").show();
     	    var $c = document.querySelector(c),
     	        $d = document.querySelector(d),
     	        file = $c.files[0],
@@ -448,6 +508,7 @@
 
     	var nupload = function(c, d){
     	    "use strict";
+    	    $("#qrcodeupload").show();
     	    var $c = document.querySelector(c),
     	        $d = document.querySelector(d),
     	        file = $c.files[0],
@@ -460,8 +521,10 @@
     	
     	
       $(document).ready(function(){
-    	  $('form').submit(function (event) {
+    	  
+    	  $('#photoform').submit(function (event) {
     	        event.preventDefault();
+    	        $("#photoupload").hide();
     	        var form = $(this);
     	          var formData = new FormData(this);
     	          $.ajax({
@@ -478,6 +541,28 @@
     	        	  confirm("上传失败，请重新上传");
     	          });
     	      });
+    	  
+    	  
+    	  
+    	  $('#qrcodeform').submit(function (event) {
+  	        event.preventDefault();
+  	        $("#qrcodeupload").hide();
+  	        var form = $(this);
+  	          var formData = new FormData(this);
+  	          $.ajax({
+  	            type: form.attr('method'),
+  	            url: form.attr('action'),
+  	            data: formData,
+  	            mimeType: "multipart/form-data",
+  	            contentType: false,
+  	            cache: false,
+  	            processData: false
+  	          }).success(function () {
+  	            confirm("上传成功");
+  	          }).fail(function (jqXHR, textStatus, errorThrown) {
+  	        	  confirm("上传失败，请重新上传");
+  	          });
+  	      });
     	  
     	  
         var shouhuo = $("#jdbfzkl");
