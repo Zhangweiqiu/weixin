@@ -71,7 +71,7 @@
             <div class="mui-input-row">
                 <i class="iconfont icon-yanzhengma"></i>
                 <input type="tel" id="imgcode" class="mui-input-clear code" placeholder="请输入图片验证码" maxlength="6">
-                <canvas type="tel" id = "canvas" width="140" height="30" onclick = "drawPic()"></canvas>
+                <canvas type="tel" id = "canvas" width="120" height="40" onclick = "drawPic()"></canvas>
             </div >
             <div class="mui-input-row">
                 <i class="iconfont icon-yanzhengma"></i>
@@ -782,10 +782,8 @@
 				data:{"phone":$("#mobile1").val(),"password":$("#password1").val()},
 				success:function(data){
 					if(data.state){
-						alert("注册成功，将转到登录界面");
 						window.location.href = data.url;
 					}else{
-						alert("注册失败，请检查数据是否正确");
 						window.location.href = "/reg.html";
 					}
 				}
