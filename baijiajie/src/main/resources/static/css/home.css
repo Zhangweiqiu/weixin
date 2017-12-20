@@ -1,4 +1,4 @@
-ï»¿body {
+body {
     font-family: "microsoft yahei";
     background: #FFFFFF;
 }
@@ -23,7 +23,7 @@
     -moz-animation: change 10s linear 0s infinite;
     /* Firefox */
     -webkit-animation: change 10s linear 0s infinite;
-    /* Safari å’Œ Chrome */
+    /* Safari ºÍ Chrome */
     -o-animation: change 10s linear 0s infinite;
     /* Opera */
     float: left;
@@ -244,7 +244,7 @@ li {
     -moz-animation: change 10s linear 0s infinite;
     /* Firefox */
     -webkit-animation: change 10s linear 0s infinite;
-    /* Safari å’Œ Chrome */
+    /* Safari ºÍ Chrome */
     -o-animation: change 10s linear 0s infinite;
     /* Opera */
     position: absolute;

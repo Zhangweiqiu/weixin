@@ -12,4 +12,13 @@ public interface BusinessDao extends CrudRepository<Business,Long>{
 	@Modifying
 	@Query(nativeQuery=true,value="SELECT * FROM business ORDER By amount DESC")
 	public List<Business> selectOrderByAmount();
+	
+	
+	@Modifying
+	@Query(nativeQuery=true,value="SELECT * FROM business ORDER By amount ")
+	public List<Business> selectOrderByAmountg();
+
+	@Modifying
+	@Query(nativeQuery=true,value="SELECT * FROM business ORDER By period DESC")
+	public List<Business> selectOrderByPeriod();
 }

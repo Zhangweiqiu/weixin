@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./百家放款_files/leep.css">
     <link rel="stylesheet" type="text/css" href="./百家放款_files/common.css">
     <link rel="stylesheet" type="text/css" href="./首页_files/iconfont.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
 <style type="text/css">
 /*body{background: #FFFFFF;font-family: "microsoft yahei";}
 .count-down{background: #FFFFFF;}
@@ -240,14 +241,14 @@ h2{text-align: center;/* line-height: 210px;*/
 		   			</div>
 		   			<div class="box4 ">
 		   				<p>目前预授信商家</p>
-		   				<span class="num">0</span>
+		   				<span class="num" id = "bnum"></span>
 		   				<input type="hidden" name="pd" id="pd" value="">
 		   				<i>家</i>
 		   			</div>
 		   			<!--<span class="num"></span>
 		   			<span class="num2">最高可借</span>-->
 		   		</div>
-		   		<h5>最低预授信额度：2000元</h5>
+		   		<h5 >最低预授信额度：<span id = "lowAmount"></span><span>元</span></h5>
 		   		<h5 id="bus_num">目前可接单商家：<span id = "total"></span><span>家</span></h5>
 		   		<ul class="list_k list_k1">
 		   			<li>
@@ -317,6 +318,26 @@ h2{text-align: center;/* line-height: 210px;*/
             <div class="rect5"></div>
         </div>
     </div>
+    
+    
+    <div class="modal fade" id="myModal">
+	      <div class="modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <p align="center">商家您已经申请过了哦~请直接联系商家!
+	            </p>
+	          </div>
+	          <div class="modal-body">
+	            <center><img  alt="" src="picture/QQLOGO.png"></center>
+	          </div>
+	          <div class="modal-footer">
+	          		<p align="center">QQ号:<span id="showQQ"></span></p>
+	          </div>
+	        </div><!-- /.modal-content -->
+	      </div><!-- /.modal-dialog -->
+	    </div><!-- /.modal -->
+    
 	<div class="back_box">
 			<p>请添加客服审核</p>
 			<img src="http://a.rrjiekuan.com/w_bjj/count-down.html?is_auto=1&amp;send_c_limit=20">
@@ -336,7 +357,7 @@ h2{text-align: center;/* line-height: 210px;*/
             <span style="font-size: 23px;" class="mui-icon iconfont icon-guanwang"></span>
             <span class="mui-tab-label">网贷</span>
         </a>
-       	<a href = "/百家放款.html" class="mui-tab-item">
+       	<a href = "/借条.html" class="mui-tab-item">
             <span class="mui-icon iconfont icon-jiekuan-xuanzhong"></span>
             <span class="mui-tab-label">借条</span>
         </a>
@@ -368,6 +389,7 @@ h2{text-align: center;/* line-height: 210px;*/
     
 <script src="js/jquery.min.js" ></script>
 <script src="js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script src="js/jquery.easydrag.handler.beta2.js"></script>
 
 <script type="text/javascript">
@@ -567,6 +589,34 @@ h2{text-align: center;/* line-height: 210px;*/
 					alert("数据加载错误");
 			}
 		});
+		
+		$.ajax({
+			url:'/countbusiness',
+			type:'post',
+			dataType:'json',
+			data:{},
+			success:function(data){
+				if(data.state){
+					var da = data.bnum;
+					$("#bnum").text(da.length);
+				}else
+					alert("数据加载错误");
+			}
+		});
+		
+		$.ajax({
+			url:'/selectlowByAmountg',
+			type:'post',
+			dataType:'json',
+			data:{},
+			success:function(data){
+				if(data.state){
+					var da = data.lowAmount;
+					$("#lowAmount").text(da);
+				}else
+					alert("数据加载错误");
+			}
+		});
 	
 	function loding(data){
 		var inner;
@@ -580,14 +630,20 @@ h2{text-align: center;/* line-height: 210px;*/
 		}
 	}
 	
+	var $modal = $('#myModal');
 	function showQQ(e){
 		var qq = $(e).val();
-		document.getElementById('IO').innerHTML = '';
-		var inner ;
-		inner = "<img alt=\"\" src='picture/weixb.png'/>";
-        inner += "<p>"+qq+"</p>";
-        $("#IO").append(inner);
-		$('.showQQ').show();
+		$("#showQQ").text(qq);
+
+		$modal.modal({backdrop: 'static'});
+		
+		$modal.on('show.bs.modal', function(){
+	          var $this = $(this);
+	          var $modal_dialog = $this.find('.modal-dialog');
+	          // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零
+	          $this.css('display', 'block');
+	          $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - $modal_dialog.height()) / 2) });
+	        });
 	}  
 	
 	function hideQQ(){

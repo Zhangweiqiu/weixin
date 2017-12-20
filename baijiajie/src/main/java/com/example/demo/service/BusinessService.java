@@ -26,4 +26,37 @@ public class BusinessService {
 			map.put("state", false);
 		return map;
 	}
+	
+	public Map<String,Object> countbusiness() {
+		Map<String,Object> map = new HashMap<>();
+		List<Business> lbusiness = (List<Business>) businessDao.findAll();
+		System.out.println(lbusiness.size());
+		map.put("state", true);
+		map.put("bnum", lbusiness);
+		return map;
+	}
+	
+	public Map<String,Object> selectlowByAmountg(){
+		Map<String,Object> map = new HashMap<>();
+		List<Business> business = businessDao.selectOrderByAmountg();	
+		if(business != null) {
+			Float lowAmount = business.get(0).getAmount();
+			map.put("state", true);
+			map.put("lowAmount", lowAmount);
+		}else
+			map.put("state", false);
+		return map;
+	}
+
+	public Map<String, Object> addBInfoByPeriod() {
+		Map<String,Object> map = new HashMap<>();
+		List<Business> business = businessDao.selectOrderByPeriod();
+		if(business != null) {
+			map.put("state", true);
+			map.put("amount", business);
+		}else
+			map.put("state", false);
+		return map;
+	}
+	
 }

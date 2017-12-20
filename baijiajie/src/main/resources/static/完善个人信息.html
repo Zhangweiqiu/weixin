@@ -10,9 +10,11 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link href="css/mui.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/infotion.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/iconfont1.css"/>
+	<link rel="stylesheet" href="/css/jquery.range.css">
 </head>
 
 <style type="text/css">
@@ -402,20 +404,23 @@
 
     </div>
 
-    <div class="pop pop_i1" style="display: none;" id="pop pop_ii">
-        <div class="d_cell">
-            <div class="pop_text">
-                <i class="mui-icon mui-icon-closeempty close_i"></i>
-                <p class="pb15">个人信息修改成功! 是否前往借款?</p>
-                <!-- <p class="t_c">贷款金额：<span class="c_price">7115</span>元</p> -->
-                <!-- <p class="t_c">贷款期限：<span class="c_date">6</span>个月</p> -->
-                <div class="pop_btn">
-                    <a href="javascript:;" class="btn" id="apply_jiedai">马上借钱</a>
-                    <a href="member.html" class=" poh_geren">个人中心</a>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id="myModal">
+	      <div class="modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	          </div>
+	          <div class="modal-body">
+	            <p>个人信息修改成功! 是否前往借款?</p>
+	          </div>
+	          <div class="modal-footer">
+	          		<center><button class="btn btn-primary btn-lg" id="apply_jiedai">马上借钱</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="member.html" class=" btn btn-primary btn-lg">个人中心</a></center>
+	          </div>
+	        </div><!-- /.modal-content -->
+	      </div><!-- /.modal-dialog -->
+	    </div><!-- /.modal -->
+    
     <div class="pop pop_alert"  >
         <div class="d_cell">
             <div class="pop_text">
@@ -429,25 +434,29 @@
         </div>
     </div>
     
-    <div class="muibjj-backdrop">
+    <div class="modal fade" id="muibjj">
+    <div class="modal-dialog" >
+    <div  class="muibjj-backdrop" id="modelback">
     	<div class="back_img">
     		<img src="picture/tuisongtix.png"/>
     		<div class="back_btn">
     			<div class="back_title">
     				商家选择
     			</div>
-    			<h5 style="clear: left;text-align: center;"><span id='block-range-val'>20</span></h5>   
+    			
+    			<h5 style="clear: left;text-align: center;"><span id='block-range-val'>&nbsp;&nbsp;</span></h5>   
 		        <div class="mui-input-row mui-input-range">
-		            <input type="range" id='block-range' value="20" min="0" max="100" >
+		        	<input type="hidden" id="age-slider" value="20" /><span id='block-range-val'>&nbsp;&nbsp;</span>
 		        </div>
     			<div class="back_btnt clearfix">
-    				<button type="button" class="mui-btn btn-qux">取消</button>
-    				<button type="button" class="mui-btn mui-btn-primary btn-ts">确认推送</button>
+    				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    				<button type="button" class="mui-btn mui-btn-primary btn-ts" id="tuiso">确认推送</button>
     			</div>
-    		</div>
     	</div>
     </div>
-    
+    </div>
+    </div>
+    </div>
     
    
     <script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
@@ -458,6 +467,8 @@
     
     <script type="text/javascript" src="/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/jquerysession.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.range.js"></script>
     <script type="text/javascript">
     
     
@@ -521,6 +532,17 @@
     	
     	
       $(document).ready(function(){
+    	  $('#age-slider').jRange({
+              from: 0,
+              to: 100,
+              step: 1, 
+              format: '%s',
+              width: 240,
+              showLabels: true,
+              showScale: false,
+              theme: "theme-blue"
+          
+          });
     	  
     	  $('#photoform').submit(function (event) {
     	        event.preventDefault();
@@ -576,7 +598,7 @@
 		   }
 		});
 	    	
-        var poppop_ii = $("#pop pop_ii");
+       
 		
         
         var address_s;
@@ -617,6 +639,8 @@
 		userj = $.session.get('user');
 		user = $.parseJSON( userj );
 		
+	
+        var $modal = $('#myModal');
 			$("#reggo").click(function(){
 				
 				$.ajax({
@@ -630,7 +654,15 @@
 						  address:address_s.options[address_sindex].text},
 					success:function(data){
 						if(data){
-							poppop_ii.fadeIn(0);
+							$modal.modal({backdrop: 'static'});
+							
+							$modal.on('show.bs.modal', function(){
+						          var $this = $(this);
+						          var $modal_dialog = $this.find('.modal-dialog');
+						          // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零
+						          $this.css('display', 'block');
+						          $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - $modal_dialog.height()) / 2) });
+						        });
 						}
 						else
 							alert("完善失败，请检查信息");
@@ -639,6 +671,28 @@
 						alert("完善失败，请检查信息");
 					}
 				});
+			});
+			
+			var $muibjj = $('#muibjj');
+			$("#apply_jiedai").click(function(){
+				$("#myModal").modal("hide");
+				document.getElementById('modelback').style.display='block';
+				 
+				 
+				$muibjj.modal({backdrop: 'static'});
+				
+				$muibjj.on('show.bs.modal', function(){
+			          var $this = $(this);
+			          var $modal_dialog = $this.find('.modal-dialog');
+			          // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零
+			          $this.css('display', 'block');
+			          $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - $modal_dialog.height()) / 2) });
+			        });
+			});
+			
+			$("#tuiso").click(function(){
+			
+			alert($("#age-slider").val());
 			});
 
         });		

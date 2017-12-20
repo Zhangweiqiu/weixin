@@ -18,4 +18,24 @@ public class BusinessController {
 		System.out.println("1-2-3-4-5-6");
 		return businessService.addBInfoByAmount();
 	}
+	
+	@RequestMapping("/addBInfoByPeriod")
+	public Map<String,Object> addBInfoByPeriod(){
+		System.out.println("1-2-3-4-5-6");
+		return businessService.addBInfoByPeriod();
+	}
+	
+	@RequestMapping("/countbusiness")
+	public Map<String,Object> countbusiness(){
+		System.out.println("2");
+		return businessService.countbusiness();
+	}
+	
+	@RequestMapping("/selectlowByAmountg")
+	public Map<String,Object> selectlowByAmountg(){
+		System.out.println("3");
+		return businessService.selectlowByAmountg();
+	}
+	
+	
 }
