@@ -19,12 +19,14 @@
     <meta name="keywords" content="">
     <meta name="description" content=" ">
     <link href="./首页_files/mui.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="./首页_files/iconfont.css">
     <link rel="stylesheet" type="text/css" href="./首页_files/leep.css">
     <link rel="stylesheet" type="text/css" href="./首页_files/wzgd.css">
     <link rel="stylesheet" type="text/css" href="./首页_files/home.css">
     <link rel="stylesheet" type="text/css" href="./首页_files/common.css">
     <link rel="stylesheet" type="text/css" href="./首页_files/iconfont1.css">
+    <link rel="stylesheet" href="/css/jquery.range.css">
     <script src="./首页_files/hm.js.下载"></script><script src="./首页_files/mui.min.js.下载"></script>
     <script type="text/javascript" src="./首页_files/bjj_baidu.js.下载"></script>
 </head>
@@ -306,26 +308,31 @@
     </div>
     
     
-    <div class="muibjj-backdrop">
+    <div class="modal fade" id="muibjj">
+    <div class="modal-dialog" >
+    <div  class="muibjj-backdrop" id="modelback">
     	<div class="back_img">
-    		<img src="./首页_files/tuisongtix.png">
+    		<img src="picture/tuisongtix.png"/>
     		<div class="back_btn">
     			<div class="back_title">
     				商家选择
     			</div>
-    			<h5 style="clear: left;text-align: center;"><span id="block-range-val">20</span></h5>   
+    			
+    			<h5 style="clear: left;text-align: center;"><span id='block-range-val'>&nbsp;&nbsp;</span></h5>   
 		        <div class="mui-input-row mui-input-range">
-		            <input type="range" id="block-range" value="20" min="0" max="100" data-input-slider="1"><span class="mui-tooltip mui-hidden"></span>
+		        	<input type="hidden" id="age-slider" value="20" /><span id='block-range-val'>&nbsp;&nbsp;</span>
 		        </div>
     			<div class="back_btnt clearfix">
-    				<button type="button" class="mui-btn btn-qux">取消</button>
-    				<button type="button" class="mui-btn mui-btn-primary btn-ts">确认推送</button>
+    				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    				<button type="button" class="mui-btn mui-btn-primary btn-ts" id="tuiso">确认推送</button>
     			</div>
-    		</div>
     	</div>
     </div>
+    </div>
+    </div>
+    </div>
     
-    <div class="follow_covercc follow_coverc2" > 
+    <div class="follow_covercc follow_coverc2"  > 
     </div>
 	    <div class="ckeck_alert"  > 
 		    <h1>"百家借"用户借款申请推送<br>授权以及许可协议</h1> 
@@ -697,7 +704,7 @@
 秦X刚，1706XX5212<br>
 </li>
 	    	
-		    </div> 
+		    </div>
 	    	<button type="button" id="bun_al2" class="al">不同意</button>
 		    <button type="button" id="bun_al" class="al al2">同意</button> 
 	   </div> 
@@ -722,10 +729,14 @@
 <script type="text/javascript" src="./首页_files/jweixin-1.0.0.js.下载"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script src="js/jquerysession.js"></script>
+
 <script type="text/javascript" src="js/globle.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.range.js"></script>
 <script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+
 </body>
 <script>
 	var user;
@@ -742,26 +753,58 @@
 			}
 		});
 	}
+	
 	user =JSON.parse($.session.get('user'));
 	function checkInfo(){
-		$.ajax({
-			url:'/checkInfo',
-			type:'post',
-			dataType:'json',
-			data:{"phone":user.phone},
-			success:function(data){
-				if(data.state){
-					if(data.Info == 0){
-						window.location.href = data.url;
-					}else{
-						window.location.href = data.url;
-					}
-				}else{
-					alert("点击错误");
-				}
-			}
-		});
+		$('.follow_coverc2').fadeIn();
+ 		$('.ckeck_alert').fadeIn();
 	}
+	
+	
+	  $('#age-slider').jRange({
+          from: 0,
+          to: 100,
+          step: 1, 
+          format: '%s',
+          width: 240,
+          showLabels: true,
+          showScale: false,
+          theme: "theme-blue"
+      
+      });
+	
+	$('#bun_al2').click(function() {	
+ 		$('.follow_coverc2').fadeOut();
+ 		$('.ckeck_alert').fadeOut();
+ 		
+ 	})
+ 	
+ 	var $muibjj = $('#muibjj');
+ 	$('#bun_al').click(function() {	
+// 		$('.landingCover').show();
+		$('.follow_covercc').fadeOut();
+		$('.ckeck_alert').fadeOut();
+		
+		document.getElementById('modelback').style.display='block';
+		$muibjj.modal({backdrop: 'static'});
+		
+		$muibjj.on('show.bs.modal', function(){
+	          var $this = $(this);
+	          var $modal_dialog = $this.find('.modal-dialog');
+	          // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零
+	          $this.css('display', 'block');
+	          $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - $modal_dialog.height()) / 2) });
+	        });
+//		show_msg2("pop_i4", "close_i");
+ 	})
+ 	
+ 	$("#tuiso").click(function(){
+			
+			$.session.set('tuiso',$("#age-slider").val());
+			window.location.href = "/百家放款.html";
+			});
+ 	
+	
 </script>
 
 </html>

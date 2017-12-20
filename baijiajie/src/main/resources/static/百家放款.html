@@ -383,7 +383,7 @@ h2{text-align: center;/* line-height: 210px;*/
 <script src="js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script src="js/jquery.easydrag.handler.beta2.js"></script>
-
+<script src="js/jquerysession.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         fans_ini();
@@ -612,13 +612,25 @@ h2{text-align: center;/* line-height: 210px;*/
 	
 	function loding(data){
 		var inner;
-		for(var i = 0 ; i < data.length; i++){
-			inner = "<li><i><img src=\"./百家放款_files/bbjlogo.png\"></i><dl><em>" + data[i].name + "</em>";
-			inner += "<em>最高额度：" + data[i].amount + "</em>";
-			inner +="<em>" + data[i].period +"&nbsp&nbsp&nbsp"+ data[i].materials + "</em>";
-			inner +="</dl><button type=\"button\" id=\"button1\" class=\"button button2\"  value=\""+ data[i].qq+"\" img=\"http://upload.rrjiekuan.com/Uploads_Picture_2017-07-26_5978406270761.jpg@baijiajie.nostyle\" onclick=\"showQQ(this)\" class=\"show\">申请</button></li>";
-//			inner += "<img src='picture/weixb.png' id=\""+data[i].qq+"\" style='display:none' width=\"160px\" hight=\"200px\">";onclick = 'showQQ(this)'
-			$("#amount").append(inner);
+		var n = $.session.get('tuiso');
+		if(n == undefined || n > data.length){
+			for(var i = 0 ; i < data.length; i++){
+				inner = "<li><i><img src=\"./百家放款_files/bbjlogo.png\"></i><dl><em>" + data[i].name + "</em>";
+				inner += "<em>最高额度：" + data[i].amount + "</em>";
+				inner +="<em>" + data[i].period +"&nbsp&nbsp&nbsp"+ data[i].materials + "</em>";
+				inner +="</dl><button type=\"button\" id=\"button1\" class=\"button button2\"  value=\""+ data[i].qq+"\" img=\"http://upload.rrjiekuan.com/Uploads_Picture_2017-07-26_5978406270761.jpg@baijiajie.nostyle\" onclick=\"showQQ(this)\" class=\"show\">申请</button></li>";
+	//			inner += "<img src='picture/weixb.png' id=\""+data[i].qq+"\" style='display:none' width=\"160px\" hight=\"200px\">";onclick = 'showQQ(this)'
+				$("#amount").append(inner);
+			}
+		}else{
+			for(var i = 0 ; i < n; i++){
+				inner = "<li><i><img src=\"./百家放款_files/bbjlogo.png\"></i><dl><em>" + data[i].name + "</em>";
+				inner += "<em>最高额度：" + data[i].amount + "</em>";
+				inner +="<em>" + data[i].period +"&nbsp&nbsp&nbsp"+ data[i].materials + "</em>";
+				inner +="</dl><button type=\"button\" id=\"button1\" class=\"button button2\"  value=\""+ data[i].qq+"\" img=\"http://upload.rrjiekuan.com/Uploads_Picture_2017-07-26_5978406270761.jpg@baijiajie.nostyle\" onclick=\"showQQ(this)\" class=\"show\">申请</button></li>";
+	//			inner += "<img src='picture/weixb.png' id=\""+data[i].qq+"\" style='display:none' width=\"160px\" hight=\"200px\">";onclick = 'showQQ(this)'
+				$("#amount").append(inner);
+			}
 		}
 	}
 	
