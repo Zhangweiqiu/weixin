@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./百家放款_files/leep.css">
     <link rel="stylesheet" type="text/css" href="./百家放款_files/common.css">
     <link rel="stylesheet" type="text/css" href="./首页_files/iconfont.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
 <style type="text/css">
 /*body{background: #FFFFFF;font-family: "microsoft yahei";}
 .count-down{background: #FFFFFF;}
@@ -356,18 +357,30 @@ h2{text-align: center;/* line-height: 210px;*/
     
     
     
-    <div class="showQQ">  
-        <div class="showQQ1">  
-            <a href="javascript:;" onclick="hideQQ()" class="close">关闭</a>  
-            <div id = "IO">	
-           </div>
-        </div>  
-    </div>  
+    <div class="modal fade" id="myModal">
+	      <div class="modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <p align="center">商家您已经申请过了哦~请直接联系商家!
+	            </p>
+	          </div>
+	          <div class="modal-body">
+	            <center><img  alt="" src="picture/QQLOGO.png"></center>
+	          </div>
+	          <div class="modal-footer">
+	          		<p align="center">QQ号:<span id="showQQ"></span></p>
+	          </div>
+	        </div><!-- /.modal-content -->
+	      </div><!-- /.modal-dialog -->
+	    </div><!-- /.modal -->
+    
     
     
     
 <script src="js/jquery.min.js" ></script>
 <script src="js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script src="js/jquery.easydrag.handler.beta2.js"></script>
 
 <script type="text/javascript">
@@ -608,19 +621,22 @@ h2{text-align: center;/* line-height: 210px;*/
 		}
 	}
 	
+	var $modal = $('#myModal');
 	function showQQ(e){
 		var qq = $(e).val();
-		document.getElementById('IO').innerHTML = '';
-		var inner ;
-		inner = "<img alt=\"\" src='picture/weixb.png'/>";
-        inner += "<p>"+qq+"</p>";
-        $("#IO").append(inner);
-		$('.showQQ').show();
+		$("#showQQ").text(qq);
+
+		$modal.modal({backdrop: 'static'});
+		
+		$modal.on('show.bs.modal', function(){
+	          var $this = $(this);
+	          var $modal_dialog = $this.find('.modal-dialog');
+	          // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零
+	          $this.css('display', 'block');
+	          $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - $modal_dialog.height()) / 2) });
+	        });
 	}  
-	
-	function hideQQ(){
-		$('.showQQ').hide();
-	} 
+
 
 </script>
 </html>
